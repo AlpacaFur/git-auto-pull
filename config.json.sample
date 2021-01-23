@@ -1,0 +1,8 @@
+{
+  "secret": "ENTER SECRET HERE",
+  "repos": {
+    "Username/RepoName": {
+      "command": "cd dir; git pull; jekyll build"
+    }
+  }
+}
