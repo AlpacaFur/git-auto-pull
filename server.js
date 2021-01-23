@@ -36,7 +36,7 @@ handler.on('error', function (err) {
 
 handler.on('push', function (event) {
   console.log(event.payload.repository.full_name, "PULL")
-  if (config[event.payload.repository.full_name] && !config.devMode && false) {
+  if (config[event.payload.repository.full_name] && !config.devMode) {
     exec(config[event.payload.repository.full_name].command)
   }
   else {
