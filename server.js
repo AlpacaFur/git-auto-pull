@@ -35,8 +35,11 @@ handler.on('error', function (err) {
 })
 
 handler.on('push', function (event) {
-  console.log(event.payload.repository.full_name, "would do the thing")
+  console.log(event.payload.repository.full_name, "PULL")
   if (config[event.payload.repository.full_name] && !config.devMode && false) {
-    exec(config[event.payload.repository.full_name])
+    exec(config[event.payload.repository.full_name].command)
+  }
+  else {
+    console.log(`Error: Repo auth valid, but repo "${event.payload.repository.full_name}" not in config!`)
   }
 })
