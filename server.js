@@ -3,7 +3,7 @@ const { exec } = require("child_process");
 const http = require('http')
 const fs = require("fs")
 var createHandler = require('github-webhook-handler')
-var handler = createHandler({ path: '/', secret: '4761d6563f1b1082a3284ffbb0eceaa6ac56dfe63ad0ac7fefb0afcaa230ff8ded9524a7c2a98251' })
+
 
 function fatalError(string) {
   console.log()
@@ -20,6 +20,12 @@ if (fs.existsSync("./config.json")) {
 else {
   fatalError("No config file found, exiting!")
 }
+
+if (!config.secret || !config.repos) {
+  fatalError("Config file missing secret or repos!")
+}
+
+var handler = createHandler({ path: '/', secret: config.secret })
 
 http.createServer(function (req, res) {
   handler(req, res, function (err) {
